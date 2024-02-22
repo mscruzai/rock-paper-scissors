@@ -36,10 +36,6 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-// `You win! ${playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1)} beats ${computerSelection}.`;
-// `You lose! ${computerSelection.charAt(0).toUpperCase() + computerSelection.slice(1)} beats ${playerSelection}.`;
-
-
 function playGame(rounds){
     
     let roundWinner;
@@ -85,12 +81,3 @@ function playGame(rounds){
 
 
 playGame(MAXROUNDS);
-
-/*
-playerChoice = 'rOcK';
-computerChoice = getComputerChoice();
-console.log(playerChoice);
-console.log(computerChoice);
-console.log(playRound(playerChoice,computerChoice));
-
-*/
