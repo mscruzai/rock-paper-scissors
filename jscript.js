@@ -112,12 +112,12 @@ function updateStatus(){
         resDiv.appendChild(entryDiv);
     } else if(rndWinner == "player"){
         const entryDiv = document.createElement('div');
-        entryDiv.textContent = "Player wins!";
+        entryDiv.textContent = "Player wins round!";
         resDiv.appendChild(entryDiv);
         pScore++;
     } else if(rndWinner == "computer"){
         const entryDiv = document.createElement('div');
-        entryDiv.textContent = "Computer wins!";
+        entryDiv.textContent = "Computer wins round!";
         resDiv.appendChild(entryDiv);
         cScore++;
     } else {
