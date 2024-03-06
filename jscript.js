@@ -1,6 +1,7 @@
 const MAXROUNDS = 5;
 let computerChoice;
 let playerChoice;
+let gameWinner;
 
 let hand = ["Rock", "Paper", "Scissors"];
 
@@ -80,4 +81,96 @@ function playGame(rounds){
 }
 
 
-playGame(MAXROUNDS);
+// playGame(MAXROUNDS);
+
+
+const RACETOSCORE = 5;
+const gContainer = document.querySelector('#gameHdr');
+gContainer.textContent = `Rock, Paper Scissors Game: Race to ${RACETOSCORE}`;
+
+let rndWinner;
+let pChoice;
+let cChoice;
+let pScore = 0;
+let cScore = 0;
+let isGameOver = false;
+
+const resDiv = document.querySelector('#resultsFld');
+
+function restartGame(){
+    resDiv.textContent = 'Game Restarted';
+    pScore = 0;
+    cScore = 0;
+    isGameOver = false;
+}
+
+function updateStatus(){
+
+    if(rndWinner == "draw"){
+        const entryDiv = document.createElement('div');
+        entryDiv.textContent = "It's a draw!";
+        resDiv.appendChild(entryDiv);
+    } else if(rndWinner == "player"){
+        const entryDiv = document.createElement('div');
+        entryDiv.textContent = "Player wins!";
+        resDiv.appendChild(entryDiv);
+        pScore++;
+    } else if(rndWinner == "computer"){
+        const entryDiv = document.createElement('div');
+        entryDiv.textContent = "Computer wins!";
+        resDiv.appendChild(entryDiv);
+        cScore++;
+    } else {
+        const entryDiv = document.createElement('div');
+        entryDiv.textContent = "Cannot determine round winner!";
+        resDiv.appendChild(entryDiv);
+    }
+
+    const entryDiv = document.createElement('div');
+    entryDiv.textContent = `Player: ${pScore}   Computer: ${cScore}.`;
+    resDiv.appendChild(entryDiv);
+    console.log(`Player: ${pScore}   Computer: ${cScore}.`);
+    
+    
+    if(pScore >= RACETOSCORE | cScore>= RACETOSCORE ){
+        isGameOver = true;
+        if(pScore > cScore){
+            gameWinner = 'Player';
+        }
+        if(cScore > pScore){
+            gameWinner = 'Computer';
+        }
+        
+        const entryDiv = document.createElement('div');
+        entryDiv.textContent = `Game over: ${gameWinner} wins!`;
+        resDiv.appendChild(entryDiv);
+
+        const restartBtn = document.createElement('button');
+        restartBtn.textContent = 'Restart';
+        resDiv.appendChild(restartBtn);
+        restartBtn.addEventListener('click', restartGame);
+    }
+
+
+}
+
+const rBtn = document.querySelector('#rockBtn');
+rBtn.addEventListener('click', () => {
+    cChoice = getComputerChoice();
+    rndWinner = playRound("Rock", cChoice);    
+    isGameOver ? restartGame() : updateStatus();
+});
+
+const pBtn = document.querySelector('#paperBtn');
+pBtn.addEventListener('click', () => {
+    cChoice = getComputerChoice();
+    rndWinner = playRound("Paper", cChoice);    
+    isGameOver ? restartGame() : updateStatus();
+});
+
+const sBtn = document.querySelector('#sciBtn');
+sBtn.addEventListener('click', () => {
+    cChoice = getComputerChoice();
+    rndWinner = playRound("Paper", cChoice);    
+    isGameOver ? restartGame() : updateStatus();
+});
